@@ -10,9 +10,11 @@ pipeline {
 			}
 		}
 		stage("test"){
-		withCredentials([string(credentialsId: 'publicip')]) {
-		sh 'echo $credentialsId'
-		}
+			steps{
+				withCredentials([string(credentialsId: 'publicip')]) {
+				sh 'echo $credentialsId'
+				}
+			}
 		}
 		stage("publish"){
 			steps {
