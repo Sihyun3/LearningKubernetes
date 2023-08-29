@@ -18,12 +18,12 @@ pipeline {
 		}
 		stage("Docker Login") {
 			steps {
-                sh docker login -u $DOCKER_ID -p $DOCKER_KEY
+                sh 'docker login -u $DOCKER_ID -p $DOCKER_KEY'
 			}	
 		}
 		stage("Docker push"){
 			steps{
-				sh docker push sihyun2/firstservice
+				sh 'docker push sihyun2/firstservice'
 			}
 		}
 	}
