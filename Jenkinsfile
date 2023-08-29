@@ -24,7 +24,7 @@ pipeline {
 							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker rm -f sihyun2/firstservice'"
 							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker rmi -f sihyun2/firstservice'"
 							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker pull sihyun2/firstservice'"
-							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker container run -d  --name sihyun2/firstservice -p 8080:8080 sihyun2/firstservice'"
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker container run -d  --name firstservice -p 8080:8080 sihyun2/firstservice'"
 					}
 				}	
 			}
