@@ -35,6 +35,7 @@ pipeline {
 		stage("publish"){
 			steps {
 			withCredentials([string(credentialsId: 'publicip')]) {
+				sh 'echo $credentialsId'
 					sshagent(credentials: ['EC2SSH']) {
 							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rm -f sihyun2/firstservice'
 							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rmi -f sihyun2/firstservice'
