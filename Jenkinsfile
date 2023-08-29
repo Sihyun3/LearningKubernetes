@@ -1,5 +1,7 @@
 pipeline {
 	agent any
+
+
 	stages {
 		stage("git clone") {
 			steps {
@@ -28,6 +30,18 @@ pipeline {
 			
 				sh 'docker push sihyun2/firstservice'
 				
+			}
+		}
+		stage("publish"){
+			steps {
+			withCredentials([string(credentialsId: 'publicip')]) {
+					sshagent(credentials: ['EC2SSH']) {
+							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rm -f sihyun2/firstservice'
+							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rmi -f sihyun2/firstservice'
+							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker pull sihyun2/firstservice'
+							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker container run -d  --name sihyun2/firstservice -p 8080:8080 sihyun2/firstservice'
+					}
+				}	
 			}
 		}
 	}
