@@ -1,7 +1,7 @@
 pipeline {
 	environment {
-		DOCKER_ID = credentials('DockerCredential-id')
-		DOCKER_KEY = credentials('DockerCredential-key')
+		DOCKER_USER_ID = credentials('DOCKER_USER_ID')
+		DOCKER_USER_PASSWORD = credentials('DOCKER_USER_PASSWORD')
     }
 	agent any
 	stages {
@@ -18,7 +18,8 @@ pipeline {
 		}
 		stage("Docker Login") {
 			steps {
-                sh 'docker login -u $DOCKER_ID -p $DOCKER_KEY'
+				
+                sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
 			}	
 		}
 		stage("Docker push"){
