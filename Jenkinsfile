@@ -1,8 +1,4 @@
 pipeline {
-	environment {
-		DOCKER_USER_ID = credentials('DOCKER_USER_ID')
-		DOCKER_USER_PASSWORD = credentials('DOCKER_USER_PASSWORD')
-    }
 	agent any
 	stages {
 		stage("git clone") {
@@ -18,7 +14,11 @@ pipeline {
 		}
 		stage("Docker Login") {
 			steps {
-				
+				withCredentials([[$class: 'UsernamePasswordMultiBinding',
+								credentialsId: 'DockerCredential',
+								usernameVariable: 'DOCKER_USER_ID',
+								passwordVariable: 'DOCKER_USER_PASSWORD'
+								]]){
                 sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
 			}	
 		}
