@@ -14,19 +14,20 @@ pipeline {
 		}
 		stage("Docker Login") {
 			steps {
-				
-                sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
-			}	
-		}
-		stage("Docker push"){
-			steps{
-				withCredentials([[$class: 'UsernamePasswordMultiBinding',
+					withCredentials([[$class: 'UsernamePasswordMultiBinding',
 								credentialsId: 'docker_credentials',
 								usernameVariable: 'DOCKER_USER_ID',
 								passwordVariable: 'DOCKER_USER_PASSWORD'
 								]]){
-					sh 'docker push sihyun2/firstservice'
-				}
+                			sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
+						}
+			}	
+		}
+		stage("Docker push"){
+			steps{
+			
+				sh 'docker push sihyun2/firstservice'
+				
 			}
 		}
 	}
