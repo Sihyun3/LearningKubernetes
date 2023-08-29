@@ -9,7 +9,7 @@ pipeline {
 		}
 		stage("Build") {
 			steps {
-                sh 'sudo docker image -t sihyun2/firstservice build .'
+                sh 'docker image -t sihyun2/firstservice build .'
 			}
 		}
 		stage("Docker Login") {
