@@ -21,10 +21,10 @@ pipeline {
 			withCredentials([string(credentialsId: 'publicip', variable: 'credentialsId')]) {
 				sh 'echo $credentialsId'
 					sshagent(credentials: ['EC2SSH']) {
-							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rm -f sihyun2/firstservice'
-							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker rmi -f sihyun2/firstservice'
-							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker pull sihyun2/firstservice'
-							sh 'ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId docker container run -d  --name sihyun2/firstservice -p 8080:8080 sihyun2/firstservice'
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker rm -f sihyun2/firstservice'"
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker rmi -f sihyun2/firstservice'"
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker pull sihyun2/firstservice'"
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'sudo docker container run -d  --name sihyun2/firstservice -p 8080:8080 sihyun2/firstservice'"
 					}
 				}	
 			}
