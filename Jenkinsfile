@@ -11,7 +11,7 @@ pipeline {
 		}
 		stage("test"){
 			steps{
-				withCredentials([string(credentialsId: 'credentialsId')]) {
+				withCredentials([string(credentialsId: 'publicip', variable: 'credentialsId')]) {
 				sh 'echo $credentialsId'
 				}
 			}
