@@ -1,7 +1,7 @@
 pipeline {
 	environment {
-		DOCKER_ID = credentails('DockerCredential-id')
-		DOCKER_KEY = credentails('DockerCredential-key')
+		DOCKER_ID = credentials('DockerCredential-id')
+		DOCKER_KEY = credentials('DockerCredential-key')
     }
 	agent any
 	stages {
