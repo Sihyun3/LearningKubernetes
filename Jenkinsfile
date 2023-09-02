@@ -1,7 +1,6 @@
 pipeline {
 	agent any
-  	environment {
-		// hash = "${sh'echo $(git log -1 --pretty=%h)'}"	
+	environment{
 		hash = sh (script: "git log -1 --pretty=%h", returnStdout: true).trim()
 	}
 
@@ -12,9 +11,41 @@ pipeline {
 				url:'https://github.com/Sihyun3/LearningKubernetes.git'
 			}
 		}
-		stage("test"){
+		stage("Docker delete image"){
 			steps{
-				echo "Hash = ${env.hash}"
+				sh 'docker image rm $(docker images --filter=reference="sihyun2/firstservice:*" -q)'
+			}
+		}
+		stage("Build") {
+			steps {
+                		sh 'docker image build -t sihyun2/firstservice:${env.hash}  .'
+			}
+		}
+		stage("Docker Login") {
+			steps {
+					withCredentials([[$class: 'UsernamePasswordMultiBinding',
+								credentialsId: 'DockerCredential',
+								usernameVariable: 'DOCKER_USER_ID',
+								passwordVariable: 'DOCKER_USER_PASSWORD'
+								]]){
+                			sh 'docker login -u $DOCKER_USER_ID -p $DOCKER_USER_PASSWORD'
+						}
+			}	
+		}
+		stage("Docker push"){
+			steps{
+				sh 'docker push sihyun2/firstservice:${env.hash}'
+			}
+		}
+	
+		stage("publish"){
+			steps {
+			withCredentials([string(credentialsId: 'publicip', variable: 'credentialsId')]) {
+				sh 'echo $credentialsId'
+					sshagent(credentials: ['EC2SSH']) {
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'kubectl set image deployment/my-web-server1 my-web-server1=sihyun2/firstservice:${env.hash}'"
+					}
+				}	
 			}
 		}
 	}
