@@ -18,7 +18,7 @@ pipeline {
 		}
 		stage("Build") {
 			steps {
-                		sh 'docker image build -t sihyun2/firstservice:${env.hash}  .'
+                		sh "docker image build -t sihyun2/firstservice:${env.hash}  ."
 			}
 		}
 		stage("Docker Login") {
