@@ -1,7 +1,8 @@
 pipeline {
 	agent any
   	environment {
-		hash = "${sh'echo $(git log -1 --pretty=%h")'}"	
+		hash = "${sh'echo $(git log -1 --pretty=%h)'}"	
+		// hash = sh (script: "ls -al /tmp | wc -l", returnStdout: true).trim()
 	}
 
 	stages {
