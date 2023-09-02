@@ -15,7 +15,7 @@ public class Controller {
 		try {
 			InetAddress inetAddress = InetAddress.getLocalHost();
 			String strIpAdress = inetAddress.getHostAddress();
-			String html = " 현재 내부 아이피 주소는 <b>" + strIpAdress+"</b> 입니다.";
+			String html = " 현재 내부 아이피 주소는 <b>" + strIpAdress+"</b> 입니다. rolling update 테스트 입니다.";
 			return ResponseEntity.status(HttpStatus.OK).body(html);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
