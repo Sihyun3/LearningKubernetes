@@ -12,7 +12,6 @@ pipeline {
 			}
 		}
 		stage("Docker delete image"){
-			echo docker images --filter=reference="sihyun2/firstservice:*" -q
 			steps{
 				 try{
 					sh 'docker image rm $(docker images --filter=reference="sihyun2/firstservice:*" -q)'
