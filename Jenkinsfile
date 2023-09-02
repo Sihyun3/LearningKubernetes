@@ -52,7 +52,7 @@ pipeline {
 					sshagent(credentials: ['EC2SSH']) {
 							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'mkdir testmaking'"
 
-							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'cd /home/ubuntu/temp | kubectl set image deployment/my-web-server1 my-web-server1=sihyun2/firstservice:${env.hash}'"
+							sh "ssh -o StrictHostKeyChecking=no ubuntu@$credentialsId 'cd /home/ubuntu/temp | sudo kubectl set image deployment/my-web-server1 my-web-server1=sihyun2/firstservice:${env.hash}'"
 					}
 				}	
 			}
