@@ -41,7 +41,7 @@ pipeline {
 		}
 		stage("Docker push"){
 			steps{
-				sh 'docker push sihyun2/firstservice:${env.hash}'
+				sh "docker push sihyun2/firstservice:${env.hash}"
 			}
 		}
 	
