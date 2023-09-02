@@ -13,11 +13,11 @@ pipeline {
 		}
 		stage("Docker delete image"){
 			steps{
-				 try{
+				try{
 					sh 'docker image rm $(docker images --filter=reference="sihyun2/firstservice:*" -q)'
 				}catch(e){
-				 echo "삭제할 이미지가 없습니다."
-				 }
+				 	echo "삭제할 이미지가 없습니다."
+				}
 				
 			}
 		}
