@@ -12,8 +12,14 @@ pipeline {
 			}
 		}
 		stage("Docker delete image"){
+			echo docker images --filter=reference="sihyun2/firstservice:*" -q
 			steps{
-				sh 'docker image rm $(docker images --filter=reference="sihyun2/firstservice:*" -q)'
+				 try{
+					sh 'docker image rm $(docker images --filter=reference="sihyun2/firstservice:*" -q)'
+				}catch(e){
+				 echo "삭제할 이미지가 없습니다."
+				 }
+				
 			}
 		}
 		stage("Build") {
