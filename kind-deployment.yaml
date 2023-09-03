@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: my-web-server1
-          image: sihyun2/firstservice
+          image: sihyun2/firstservice:v1
           resources:
             requests:
               cpu: 20m
