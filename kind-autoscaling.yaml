@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: kubernetes-app-hpa
+  namespace: default
+spec:
+  maxReplicas: 6
+  minReplicas: 4
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-web-server1
+  targetCPUUtilizationPercentage: 30

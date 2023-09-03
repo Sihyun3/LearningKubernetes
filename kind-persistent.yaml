@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nfs
+spec:
+  capacity:
+    storage: 2Gi # 스토리지 용량 2GB
+  volumeMode: Filesystem # 파일 시스템 형식
+  accessModes: # 읽기/쓰기 옵션
+  - ReadWriteMany
+  storageClassName: manual
+  nfs:
+    path: / 
+    server: 10.96.192.4
+

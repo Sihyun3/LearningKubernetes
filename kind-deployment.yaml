@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-web-server1
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: my-web-server1
+  template:
+    metadata:
+      name: my-web-server1
+      labels:
+        app: my-web-server1
+    spec:
+      containers:
+        - name: my-web-server1
+          image: sihyun2/firstservice
+          resources:
+            requests:
+              cpu: 20m
+            limits:
+              cpu: 20m
+

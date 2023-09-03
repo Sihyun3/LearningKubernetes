@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-web-server2
+  labels:
+        app: my-web-server2
+spec:
+  volumes:
+    - name: pv-storage
+      persistentVolumeClaim:
+        claimName: pv-claim
+  containers:
+    - name: my-web-server2
+      image: sihyun2/secondservice
+      volumeMounts:
+        - mountPath: "/upload"
+          name: pv-storage
